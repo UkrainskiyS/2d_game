@@ -1,6 +1,6 @@
 #include "../../so_long.h"
 
-void *free_map(char **map, int len)
+void *free_map(char **map)
 {
 	int i;
 
@@ -63,7 +63,7 @@ static int check_file(char **map, int len_map)
 		if (map[i - 1][j] != '1' || map[0][j] != '1')
 			return (0);
 	}
-	return (check_right(map) && check_left(map));
+	return (check_right(map) && check_left(map) && chek_correct_map(map));
 }
 
 char **parse_file(char *file)
@@ -90,6 +90,6 @@ char **parse_file(char *file)
 	map[i + 1] = NULL;
 	close(fd);
 	if (!check_file(map, i) || i < 2)
-		return (free_map(map, i));
+		return (free_map(map));
 	return (map);
 }

@@ -1,24 +1,20 @@
 #include "so_long.h"
 
-void	error(char *str)
+int main(int argc, char **argv)
 {
-	ft_putstr_fd(str, 1);
-	exit(1);
-}
-
-int main()
-{
-	char	**map;
+	t_var	game;
 	int 	x;
 	int 	y;
 
-	map = parse_file("map_big.ber");
-	if (!map)
-		error("Error\n");
-	x = (int) ft_strlen(map[0]);
+	if (argc != 2)
+		warning("Incorrect arguments!\n", 1);
+	game.map = parse_file(argv[1]);
+	if (!game.map)
+		warning("Error\n", 1);
+	x = (int) ft_strlen(game.map[0]);
 	y = -1;
-	while (map[++y]);
-	map_init(map, x, y);
-	free_map(map, y);
+	while (game.map[++y]);
+	map_init(game, x, y);
+	free_map(game.map);
 	return (0);
 }

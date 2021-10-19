@@ -1,4 +1,4 @@
-#include "../../so_long.h"
+#include "../so_long.h"
 
 static void	init_coordinate(t_elements ***elem, int x, int y, char c)
 {
@@ -33,8 +33,11 @@ void	add_element(t_var **game, t_elements **elem, const int *cord, char c)
 		mlx_put_image_to_window((*game)->mlx, (*game)->win, (*elem)->back.img,
 								cord[1] * 31, cord[0] * 31);
 	if (c == 'C')
+	{
 		mlx_put_image_to_window((*game)->mlx, (*game)->win, (*elem)->collect.img,
 								cord[1] * 31, cord[0] * 31);
+		(*elem)->collect.count++;
+	}
 	if (c == 'E')
 		mlx_put_image_to_window((*game)->mlx, (*game)->win, (*elem)->exit.img,
 								cord[1] * 31, cord[0] * 31);
@@ -50,6 +53,7 @@ void	create_map(t_var *game, t_elements *elem, char **map)
 	int y;
 	int x;
 
+	elem->collect.count = 0;
 	y = -1;
 	while (map[++y])
 	{
@@ -63,10 +67,8 @@ void	create_map(t_var *game, t_elements *elem, char **map)
 	}
 }
 
-void map_init(char **map, int x, int y)
+void map_init(t_var game, int x, int y)
 {
-	t_var		game;
-
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, x * 31, y * 31, "so_long");
 	game.elem.back.img = mlx_xpm_file_to_image(game.mlx,"./images/background.xpm",
@@ -81,6 +83,7 @@ void map_init(char **map, int x, int y)
 	game.elem.player.img = mlx_xpm_file_to_image(
 			game.mlx,"./images/player_right.xpm", &game.elem.player.wth,
 			&game.elem.player.hht);
-	create_map(&game, &game.elem, map);
-	move_init(&game, map);
+	game.elem.player.count = 0;
+	create_map(&game, &game.elem, game.map);
+	move_init(&game, game.map);
 }

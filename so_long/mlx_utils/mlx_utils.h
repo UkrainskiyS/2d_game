@@ -16,6 +16,7 @@ typedef struct	s_data
 	int 	y;
 	int		wth;
 	int		hht;
+	int 	count;
 }			t_data;
 
 void 	add_background(t_data *data, int with, int length, int color);
