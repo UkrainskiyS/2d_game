@@ -49,6 +49,6 @@ void	move_init(t_var *game)
 	mlx_hook(game->win, 2, 0L << 2, keyboard_hook, &game);
 	mlx_hook(game->win, 17, 1L << 3, mouse_hook, &game);
 	mlx_loop_hook(game->mlx, render, game);
-	mlx_key_hook(game->win, move_render, game);
+//	mlx_key_hook(game->win, move_render, game);
 	mlx_loop(game->mlx);
 }

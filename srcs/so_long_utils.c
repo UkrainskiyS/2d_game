@@ -45,6 +45,8 @@ int	mouse_hook(t_var **game)
 
 int	keyboard_hook(int key, t_var **game)
 {
+	if (key == UP || key == DOWN || key == LEFT || key == RIGHT)
+		move_render(key, *game);
 	if (key == ESCAPE)
 	{
 		destroy_game(&game);

@@ -6,7 +6,7 @@
 /*   By:  <>                                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:28:48 by                   #+#    #+#             */
-/*   Updated: 2021/10/19 21:11:30 by                  ###   ########.fr       */
+/*   Updated: 2021/10/20 14:12:11 by                  ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include "../so_long.h"
@@ -40,7 +40,10 @@ void	move_player(t_var **game, char c, int x, int y)
 		return ;
 	}
 	if ((*game)->map[y / 31][x / 31] == 'C')
+	{
 		(*game)->elem.collect.count--;
+		(*game)->map[y / 31][x / 31] = '0';
+	}
 	if ((*game)->map[y / 31][x / 31] == 'E' && (*game)->elem.collect.count <= 0)
 	{
 		print_player(&game, c, x, y);

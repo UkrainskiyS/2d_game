@@ -52,6 +52,7 @@ typedef struct s_var
 	t_elements	elem;
 }				t_var;
 
+int		move_render(int key, t_var *game);
 void	move_player(t_var **game, char c, int x, int y);
 void	move_init(t_var *game);
 
